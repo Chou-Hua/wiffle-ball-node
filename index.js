@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require("express");
 const mongoose = require("mongoose");
 const routes = require("./server/routes/apiRoutes.js");
@@ -6,11 +7,11 @@ const port = process.env.PORT || 3000;
 
 let connectStatus = false;
 
+const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_TOKEN}@cluster0.oxuddxd.mongodb.net/wiffle-ball?retryWrites=true&w=majority` 
 async function connectMongoDB() {
   try {
-    await mongoose.connect(
-      "mongodb+srv://wiffle:jdiZsBws4EBDth2H@cluster0.oxuddxd.mongodb.net/wiffle-ball?retryWrites=true&w=majority"
-    );
+    // await mongoose.connect('mongodb+srv://wiffle:jdiZsBws4EBDth2H@cluster0.oxuddxd.mongodb.net/wiffle-ball?retryWrites=true&w=majority');
+    await mongoose.connect(uri);
     console.log("Connected to MongoDB...");
     connectStatus = true;
   } catch (error) {
