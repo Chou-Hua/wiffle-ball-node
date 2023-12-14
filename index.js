@@ -25,6 +25,7 @@ app.use(express.json()); //make sure it comes back as json
 
 app.use((req, res, next) => {
   if (connectStatus) {
+    res.header("Access-Control-Allow-Origin",'*');
     next();
   } else {
     res.status(503).send({
